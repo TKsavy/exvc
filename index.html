@@ -303,16 +303,16 @@
                 const row_v = document.createElement('tr');
 
                 // Add index
-                const indexCell = document.createElement('td');
-                indexCell.textContent = (i + 1).toString();
-                indexCell.style.textAlign = 'center';
-                row_v.appendChild(indexCell);
+                const indexCell_v = document.createElement('td');
+                indexCell_v.textContent = (i + 1).toString();
+                indexCell_v.style.textAlign = 'center';
+                row_v.appendChild(indexCell_v);
 
                 // Add audio files
                 Object.keys(audioFiles).forEach(folder => {
                     const cell_v = document.createElement('td');
                     const file_v = audioFiles_vary[folder][i];
-                    if (file) {
+                    if (file_v) {
                         const filePath_v = `Audios_vary/${folder}/${file}`;
                         const audioContainer_v = document.createElement('div');
                         audioContainer_v.className = 'audio-container'; 
@@ -337,7 +337,7 @@
                             const errorText_v = document.createElement('p');
                             errorText_v.textContent = `Error loading ${filePath}`;
                             errorText_v.style.color = 'red';
-                            cell.appendChild(errorText_v);
+                            cell_v.appendChild(errorText_v);
                         });
 
                         // Debugging: Log the file path to the console
