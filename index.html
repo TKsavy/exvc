@@ -320,9 +320,9 @@
                         
                         audio_v.controls = true;
                         const source_v = document.createElement('source');
-                        source_v.src = filePath;
+                        source_v.src = filePath_v;
                         source_v.type = 'audio/wav';
-                        audio_v.appendChild(source);
+                        audio_v.appendChild(source_v);
                         const audioName_v = document.createElement('p');
                         audioName_v.textContent = file;
                         audioName_v.style.fontSize = 'small';
