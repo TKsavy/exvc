@@ -22,7 +22,7 @@
             <h2>Abstract</h2>
             <p>
               <!-- Insert your paper abstract here -->
-              —Zero-shot voice conversion (VC) aims to alter the speaker identity in a voice to resemble that of the target speaker
+            Zero-shot voice conversion (VC) aims to alter the speaker identity in a voice to resemble that of the target speaker
             using only a short reference speech. While existing methods have achieved notable success in generating intelligible speech,balancing the trade-off between quality and similarity of the
             converted voice remains a challenge, especially when using a short target reference. To address this, we propose ExVC, a zero-shot VC model that leverages the mixture of experts (MoE)
             layers and Conformer modules to enhance the expressiveness and overall performance. Additionally, to efficiently condition the model on speaker embedding, we employ feature-wise linear
@@ -55,9 +55,9 @@
             </table>
         </section>
 
-        <section> <h3>Impact of length duration </h3></section>c
+        <section> <h3>Impact of length duration </h3></section>
 
-        <section id="audio-files_vary">
+        <section id="audio-files-vary">
             <h2>Audio Files</h2>
            <table>
                <thead>
@@ -191,6 +191,63 @@
             
             };
 
+ 
+
+             // Get the maximum number of files
+            const maxFiles = Math.max(...Object.values(audioFiles).map(files => files.length));
+
+            // Populate the table with index and audio files
+            const tbody = document.getElementById('audio-tbody');
+            for (let i = 0; i < maxFiles; i++) {
+                const row = document.createElement('tr');
+
+                // Add index
+                const indexCell = document.createElement('td');
+                indexCell.textContent = (i + 1).toString();
+                indexCell.style.textAlign = 'center';
+                row.appendChild(indexCell);
+
+                // Add audio files
+                Object.keys(audioFiles).forEach(folder => {
+                    const cell = document.createElement('td');
+                    const file = audioFiles[folder][i];
+                    if (file) {
+                        const filePath = `Audios/${folder}/${file}`;
+                        const audioContainer = document.createElement('div');
+                        audioContainer.className = 'audio-container'; 
+                        const audio = document.createElement('audio');
+                        
+                        audio.controls = true;
+                        const source = document.createElement('source');
+                        source.src = filePath;
+                        source.type = 'audio/wav';
+                        audio.appendChild(source);
+                        const audioName = document.createElement('p');
+                        audioName.textContent = file;
+                        audioName.style.fontSize = 'small';
+                        audioName.style.width = '100%'; // Ensure the width matches the audio element
+                        audioName.className = 'audio-name'; // Added class for consistent width
+                        audioContainer.appendChild(audio);
+                        //audioContainer.appendChild(audioName);
+                        cell.appendChild(audioContainer);
+
+                        // Add error handling to check if audio file loads correctly
+                        audio.addEventListener('error', () => {
+                            const errorText = document.createElement('p');
+                            errorText.textContent = `Error loading ${filePath}`;
+                            errorText.style.color = 'red';
+                            cell.appendChild(errorText);
+                        });
+
+                        // Debugging: Log the file path to the console
+                        console.log(`Loading file: ${filePath}`);
+                    }
+                    row.appendChild(cell);
+                });
+
+                tbody.appendChild(row);
+            }
+
             const audioFiles_vary = {
                 src: ['4018_103416_000003_000004.wav',
                          '4018_103416_000003_000004.wav',
@@ -236,115 +293,60 @@
                          '10_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',],
             
             };
-
-             // Get the maximum number of files
-            const maxFiles = Math.max(...Object.values(audioFiles).map(files => files.length));
-
-            // Populate the table with index and audio files
-            const tbody = document.getElementById('audio-tbody');
-            for (let i = 0; i < maxFiles; i++) {
-                const row = document.createElement('tr');
-
-                // Add index
-                const indexCell = document.createElement('td');
-                indexCell.textContent = (i + 1).toString();
-                indexCell.style.textAlign = 'center';
-                row.appendChild(indexCell);
-
-                // Add audio files
-                Object.keys(audioFiles).forEach(folder => {
-                    const cell = document.createElement('td');
-                    const file = audioFiles[folder][i];
-                    if (file) {
-                        const filePath = `Audios/${folder}/${file}`;
-                        const audioContainer = document.createElement('div');
-                        audioContainer.className = 'audio-container'; 
-                        const audio = document.createElement('audio');
-                        
-                        audio.controls = true;
-                        const source = document.createElement('source');
-                        source.src = filePath;
-                        source.type = 'audio/wav';
-                        audio.appendChild(source);
-                        const audioName = document.createElement('p');
-                        audioName.textContent = file;
-                        audioName.style.fontSize = 'small';
-                        audioName.style.width = '100%'; // Ensure the width matches the audio element
-                        audioName.className = 'audio-name'; // Added class for consistent width
-                        //audioContainer.appendChild(audio);
-                        //audioContainer.appendChild(audioName);
-                        //cell.appendChild(audioContainer);
-
-                        // Add error handling to check if audio file loads correctly
-                        audio.addEventListener('error', () => {
-                            const errorText = document.createElement('p');
-                            errorText.textContent = `Error loading ${filePath}`;
-                            errorText.style.color = 'red';
-                            cell.appendChild(errorText);
-                        });
-
-                        // Debugging: Log the file path to the console
-                        console.log(`Loading file: ${filePath}`);
-                    }
-                    row.appendChild(cell);
-                });
-
-                tbody.appendChild(row);
-            }
             
-            const maxFiles_vary = Math.max(...Object.values(audioFiles).map(files => files.length));
+            const maxFiles_vary = Math.max(...Object.values(audioFiles_vary).map(files => files.length));
 
             // Populate the table with index and audio files
             const tbody_vary = document.getElementById('audio-tbody-vary');
 
-            for (let i = 0; i < maxFiles; i++) {
-                const row = document.createElement('tr');
+            for (let i = 0; i < maxFiles_vary; i++) {
+                const row_v = document.createElement('tr');
 
                 // Add index
-                const indexCell = document.createElement('td');
-                indexCell.textContent = (i + 1).toString();
-                indexCell.style.textAlign = 'center';
-                row.appendChild(indexCell);
+                const indexCell_v = document.createElement('td');
+                indexCell_v.textContent = (i + 1).toString();
+                indexCell_v.style.textAlign = 'center';
+                row_v.appendChild(indexCell_v);
 
                 // Add audio files
-                Object.keys(audioFiles).forEach(folder => {
-                    const cell = document.createElement('td');
-                    const file = audioFiles[folder][i];
-                    if (file) {
-                        const filePath = `Audios/${folder}/${file}`;
-                        const audioContainer = document.createElement('div');
-                        audioContainer.className = 'audio-container'; 
-                        const audio = document.createElement('audio');
+                Object.keys(audioFiles_vary).forEach(folder => {
+                    const cell_v = document.createElement('td');
+                    const file_v = audioFiles_vary[folder][i];
+                    if (file_v) {
+                        const filePath_v = `Audios_vary/${folder}/${file_v}`;
+                        const audioContainer_v = document.createElement('div');
+                        audioContainer_v.className = 'audio-container'; 
+                        const audio_v = document.createElement('audio');
                         
-                        audio.controls = true;
-                        const source = document.createElement('source');
-                        source.src = filePath;
-                        source.type = 'audio/wav';
-                        audio.appendChild(source);
-                        const audioName = document.createElement('p');
-                        audioName.textContent = file;
-                        audioName.style.fontSize = 'small';
-                        audioName.style.width = '100%'; // Ensure the width matches the audio element
-                        audioName.className = 'audio-name'; // Added class for consistent width
-                        //audioContainer.appendChild(audio);
+                        audio_v.controls = true;
+                        const source_v = document.createElement('source');
+                        source_v.src = filePath_v;
+                        source_v.type = 'audio/wav';
+                        audio_v.appendChild(source_v);
+                        const audioName_v = document.createElement('p');
+                        audioName_v.textContent = file_v;
+                        audioName_v.style.fontSize = 'small';
+                        audioName_v.style.width = '100%'; // Ensure the width matches the audio element
+                        audioName_v.className = 'audio-name'; // Added class for consistent width
+                        audioContainer_v.appendChild(audio_v);
                         //audioContainer.appendChild(audioName);
-                        //cell.appendChild(audioContainer);
+                        cell_v.appendChild(audioContainer_v);
 
                         // Add error handling to check if audio file loads correctly
-                        audio.addEventListener('error', () => {
-                            const errorText = document.createElement('p');
-                            errorText.textContent = `Error loading ${filePath}`;
-                            errorText.style.color = 'red';
-                            cell.appendChild(errorText);
+                        audio_v.addEventListener('error', () => {
+                            const errorText_v = document.createElement('p');
+                            errorText_v.textContent = `Error loading ${filePath_v}`;
+                            errorText_v.style.color = 'red';
+                            cell_v.appendChild(errorText_v);
                         });
 
                         // Debugging: Log the file path to the console
-                        console.log(`Loading file: ${filePath}`);
+                        console.log(`Loading file: ${filePath_v}`);
                     }
-                    row.appendChild(cell);
+                    row_v.appendChild(cell_v);
                 });
 
-                tbody_vary.appendChild(row);
+                tbody_vary.appendChild(row_v);
             }
         });
     </script>
