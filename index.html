@@ -298,13 +298,15 @@
 
             // Populate the table with index and audio files
             const tbody_vary = document.getElementById('audio-tbody-vary');
+            const duration = ["1","3","5","8","10"];
 
             for (let i = 0; i < maxFiles_vary; i++) {
                 const row_v = document.createElement('tr');
+                
 
                 // Add index
                 const indexCell_v = document.createElement('td');
-                indexCell_v.textContent = (i + 1).toString();
+                indexCell_v.textContent = duration[i].toString();
                 indexCell_v.style.textAlign = 'center';
                 row_v.appendChild(indexCell_v);
 
