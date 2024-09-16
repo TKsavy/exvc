@@ -227,9 +227,9 @@
                         audioName.style.fontSize = 'small';
                         audioName.style.width = '100%'; // Ensure the width matches the audio element
                         audioName.className = 'audio-name'; // Added class for consistent width
-                        //audioContainer.appendChild(audio);
+                        audioContainer.appendChild(audio);
                         //audioContainer.appendChild(audioName);
-                        //cell.appendChild(audioContainer);
+                        cell.appendChild(audioContainer);
 
                         // Add error handling to check if audio file loads correctly
                         audio.addEventListener('error', () => {
@@ -328,9 +328,9 @@
                         audioName_v.style.fontSize = 'small';
                         audioName_v.style.width = '100%'; // Ensure the width matches the audio element
                         audioName_v.className = 'audio-name'; // Added class for consistent width
-                        //audioContainer.appendChild(audio);
+                        audioContainer_v.appendChild(audio_v);
                         //audioContainer.appendChild(audioName);
-                        //cell.appendChild(audioContainer);
+                        cell.appendChild(audioContainer_v);
 
                         // Add error handling to check if audio file loads correctly
                         audio_v.addEventListener('error', () => {
