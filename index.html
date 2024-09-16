@@ -324,7 +324,7 @@
                         source_v.type = 'audio/wav';
                         audio_v.appendChild(source_v);
                         const audioName_v = document.createElement('p');
-                        audioName_v.textContent = file;
+                        audioName_v.textContent = file_v;
                         audioName_v.style.fontSize = 'small';
                         audioName_v.style.width = '100%'; // Ensure the width matches the audio element
                         audioName_v.className = 'audio-name'; // Added class for consistent width
@@ -335,13 +335,13 @@
                         // Add error handling to check if audio file loads correctly
                         audio_v.addEventListener('error', () => {
                             const errorText_v = document.createElement('p');
-                            errorText_v.textContent = `Error loading ${filePath}`;
+                            errorText_v.textContent = `Error loading ${filePath_v}`;
                             errorText_v.style.color = 'red';
                             cell_v.appendChild(errorText_v);
                         });
 
                         // Debugging: Log the file path to the console
-                        console.log(`Loading file: ${filePath}`);
+                        console.log(`Loading file: ${filePath_v}`);
                     }
                     row_v.appendChild(cell_v);
                 });
