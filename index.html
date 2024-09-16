@@ -300,53 +300,53 @@
             const tbody_vary = document.getElementById('audio-tbody-vary');
 
             for (let i = 0; i < maxFiles; i++) {
-                const row = document.createElement('tr');
+                const row_v = document.createElement('tr');
 
                 // Add index
                 const indexCell = document.createElement('td');
                 indexCell.textContent = (i + 1).toString();
                 indexCell.style.textAlign = 'center';
-                row.appendChild(indexCell);
+                row_v.appendChild(indexCell);
 
                 // Add audio files
                 Object.keys(audioFiles).forEach(folder => {
-                    const cell = document.createElement('td');
-                    const file = audioFiles_vary[folder][i];
+                    const cell_v = document.createElement('td');
+                    const file_v = audioFiles_vary[folder][i];
                     if (file) {
-                        const filePath = `Audios_vary/${folder}/${file}`;
-                        const audioContainer = document.createElement('div');
-                        audioContainer.className = 'audio-container'; 
-                        const audio = document.createElement('audio');
+                        const filePath_v = `Audios_vary/${folder}/${file}`;
+                        const audioContainer_v = document.createElement('div');
+                        audioContainer_v.className = 'audio-container'; 
+                        const audio_v = document.createElement('audio');
                         
-                        audio.controls = true;
-                        const source = document.createElement('source');
-                        source.src = filePath;
-                        source.type = 'audio/wav';
-                        audio.appendChild(source);
-                        const audioName = document.createElement('p');
-                        audioName.textContent = file;
-                        audioName.style.fontSize = 'small';
-                        audioName.style.width = '100%'; // Ensure the width matches the audio element
-                        audioName.className = 'audio-name'; // Added class for consistent width
+                        audio_v.controls = true;
+                        const source_v = document.createElement('source');
+                        source_v.src = filePath;
+                        source_v.type = 'audio/wav';
+                        audio_v.appendChild(source);
+                        const audioName_v = document.createElement('p');
+                        audioName_v.textContent = file;
+                        audioName_v.style.fontSize = 'small';
+                        audioName_v.style.width = '100%'; // Ensure the width matches the audio element
+                        audioName_v.className = 'audio-name'; // Added class for consistent width
                         //audioContainer.appendChild(audio);
                         //audioContainer.appendChild(audioName);
                         //cell.appendChild(audioContainer);
 
                         // Add error handling to check if audio file loads correctly
-                        audio.addEventListener('error', () => {
-                            const errorText = document.createElement('p');
-                            errorText.textContent = `Error loading ${filePath}`;
-                            errorText.style.color = 'red';
-                            cell.appendChild(errorText);
+                        audio_v.addEventListener('error', () => {
+                            const errorText_v = document.createElement('p');
+                            errorText_v.textContent = `Error loading ${filePath}`;
+                            errorText_v.style.color = 'red';
+                            cell.appendChild(errorText_v);
                         });
 
                         // Debugging: Log the file path to the console
                         console.log(`Loading file: ${filePath}`);
                     }
-                    row.appendChild(cell);
+                    row_v.appendChild(cell_v);
                 });
 
-                tbody_vary.appendChild(row);
+                tbody_vary.appendChild(row_v);
             }
         });
     </script>
