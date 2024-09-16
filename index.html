@@ -55,6 +55,29 @@
             </table>
         </section>
 
+        <section> <h3>Impact of length duration </h3></section>c
+
+        <section id="audio-files">
+            <h2>Audio Files</h2>
+           <table>
+               <thead>
+                   <tr>
+                       <th>Duration</th>
+                       <th>Source</th>
+                       <th>Reference</th>
+                       <th>yourTTS</th>
+                       <th>FreeVC</th>
+                       <th>kNN-VC</th>
+                       <th>ours (w/o MoE)</th>
+                       <th>ExVC</th>
+                   </tr>
+               </thead>
+               <tbody id="audio-tbody-vary">
+                   <!-- Audio rows will be inserted here by JavaScript -->
+               </tbody>
+           </table>
+       </section>
+
     </main>
     <footer> 
         <p>Thanks.</p>
@@ -168,6 +191,52 @@
             
             };
 
+            const audioFiles_vary = {
+                src: ['4018_103416_000003_000004.wav',
+                         '4018_103416_000003_000004.wav',
+                         '4018_103416_000003_000004.wav',
+                         '4018_103416_000003_000004.wav',                 
+                         '4018_103416_000003_000004.wav',
+                        ], 
+                                                                                                                            
+                tgt: [   '3723_171631_000016_000001.wav',
+                         '3723_171631_000016_000001.wav',
+                         '3723_171631_000016_000001.wav',
+                         '3723_171631_000016_000001.wav',
+                         '3723_171631_000016_000001.wav',],
+                
+                yourtts: ['_1_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_3_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_5_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_8_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_10_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',],
+                
+                freevc: ['_1_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_3_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_5_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_8_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_10_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',],
+            
+                knnvc: ['_1_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_3_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_5_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_8_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_10_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',],
+            
+                ours1:  ['_1_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_3_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_5_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_8_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_10_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',],
+            
+                    ours3:  ['_1_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_3_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_5_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_8_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',
+                         '_10_train-clean-100___4018_103416_000003_000004__train-clean-100___3723_171631_000016_000001.wav',],
+            
+            };
+
              // Get the maximum number of files
             const maxFiles = Math.max(...Object.values(audioFiles).map(files => files.length));
 
@@ -221,6 +290,61 @@
                 });
 
                 tbody.appendChild(row);
+            }
+            
+            const maxFiles_vary = Math.max(...Object.values(audioFiles).map(files => files.length));
+
+            // Populate the table with index and audio files
+            const tbody_vary = document.getElementById('audio-tbody-vary');
+
+            for (let i = 0; i < maxFiles; i++) {
+                const row = document.createElement('tr');
+
+                // Add index
+                const indexCell = document.createElement('td');
+                indexCell.textContent = (i + 1).toString();
+                indexCell.style.textAlign = 'center';
+                row.appendChild(indexCell);
+
+                // Add audio files
+                Object.keys(audioFiles).forEach(folder => {
+                    const cell = document.createElement('td');
+                    const file = audioFiles[folder][i];
+                    if (file) {
+                        const filePath = `Audios/${folder}/${file}`;
+                        const audioContainer = document.createElement('div');
+                        audioContainer.className = 'audio-container'; 
+                        const audio = document.createElement('audio');
+                        
+                        audio.controls = true;
+                        const source = document.createElement('source');
+                        source.src = filePath;
+                        source.type = 'audio/wav';
+                        audio.appendChild(source);
+                        const audioName = document.createElement('p');
+                        audioName.textContent = file;
+                        audioName.style.fontSize = 'small';
+                        audioName.style.width = '100%'; // Ensure the width matches the audio element
+                        audioName.className = 'audio-name'; // Added class for consistent width
+                        //audioContainer.appendChild(audio);
+                        //audioContainer.appendChild(audioName);
+                        //cell.appendChild(audioContainer);
+
+                        // Add error handling to check if audio file loads correctly
+                        audio.addEventListener('error', () => {
+                            const errorText = document.createElement('p');
+                            errorText.textContent = `Error loading ${filePath}`;
+                            errorText.style.color = 'red';
+                            cell.appendChild(errorText);
+                        });
+
+                        // Debugging: Log the file path to the console
+                        console.log(`Loading file: ${filePath}`);
+                    }
+                    row.appendChild(cell);
+                });
+
+                tbody_vary.appendChild(row);
             }
         });
     </script>
