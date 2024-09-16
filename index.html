@@ -55,7 +55,7 @@
             </table>
         </section>
 
-        <section> <h3>Impact of length duration </h3></section>c
+        <section> <h3>Impact of length duration </h3></section>
 
         <section id="audio-files-vary">
             <h2>Audio Files</h2>
@@ -248,7 +248,7 @@
                 tbody.appendChild(row);
             }
 
-            const audioFiles = {
+            const audioFiles_vary = {
                 src: ['4018_103416_000003_000004.wav',
                          '4018_103416_000003_000004.wav',
                          '4018_103416_000003_000004.wav',
@@ -294,7 +294,7 @@
             
             };
             
-            const maxFiles_vary = Math.max(...Object.values(audioFiles).map(files => files.length));
+            const maxFiles_vary = Math.max(...Object.values(audioFiles_vary).map(files => files.length));
 
             // Populate the table with index and audio files
             const tbody_vary = document.getElementById('audio-tbody-vary');
@@ -311,7 +311,7 @@
                 // Add audio files
                 Object.keys(audioFiles).forEach(folder => {
                     const cell = document.createElement('td');
-                    const file = audioFiles[folder][i];
+                    const file = audioFiles_vary[folder][i];
                     if (file) {
                         const filePath = `Audios_vary/${folder}/${file}`;
                         const audioContainer = document.createElement('div');
