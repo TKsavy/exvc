@@ -309,11 +309,11 @@
                 row_v.appendChild(indexCell_v);
 
                 // Add audio files
-                Object.keys(audioFiles).forEach(folder => {
+                Object.keys(audioFiles_vary).forEach(folder => {
                     const cell_v = document.createElement('td');
                     const file_v = audioFiles_vary[folder][i];
                     if (file_v) {
-                        const filePath_v = `Audios_vary/${folder}/${file}`;
+                        const filePath_v = `Audios_vary/${folder}/${file_v}`;
                         const audioContainer_v = document.createElement('div');
                         audioContainer_v.className = 'audio-container'; 
                         const audio_v = document.createElement('audio');
