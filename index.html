@@ -3,41 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Audio Samples Coming Soon</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            text-align: center;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 1.2rem;
-        }
-        .stay-in-touch {
-            margin-top: 20px;
-            font-size: 1rem;
-            color: #555;
-        }
-    </style>
+    <title>ExVC</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Audio Samples Coming Soon!</h1>
-        <p>Audio samples for VC to be released soon. Stay in touch.</p>
-        <p class="stay-in-touch">Stay in touch for updates.</p>
-    </div>
+    <header>
+        <h1>ExVC: Leveraging Mixture of Experts Models for
+            Efficient Zero-shot Voice Conversion</h1>
+       <h4>Obed Irihose and Le Zhang</h4>
+
+        <h5> School of Information and Communication Engineering, </h5>        
+        <h5> University of Electronic Science and Technology of China (UESTC), Chengdu, 611731, China </h5>
+  
+        
+    </header>
+    <main>
+
+        <section class="abstract">
+            <h2>Abstract</h2>
+            <p>
+              <!-- Insert your paper abstract here -->
+              —Zero-shot voice conversion (VC) aims to alter the speaker identity in a voice to resemble that of the target speaker
+            using only a short reference speech. While existing methods have achieved notable success in generating intelligible speech,balancing the trade-off between quality and similarity of the
+            converted voice remains a challenge, especially when using a short target reference. To address this, we propose ExVC, a zero-shot VC model that leverages the mixture of experts (MoE)
+            layers and Conformer modules to enhance the expressiveness and overall performance. Additionally, to efficiently condition the model on speaker embedding, we employ feature-wise linear
+            modulation (FiLM), which modulates the network based on the input speaker embedding, thereby improving the ability to adapt to various unseen speakers. Objective and subjective evaluations
+            demonstrate that the proposed model outperforms the baseline models in terms of naturalness and quality. Audio samples are provided at: https://tksavy.github.io/exvc/.
+            </p>
+          </section>
+        
+        
+
+        </section>
+        <section id="audio-files">
+             <h2>Audio Files</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Source</th>
+                        <th>Reference</th>
+                        <th>yourTTS</th>
+                        <th>FreeVC</th>
+                        <th>kNN-VC</th>
+                        <th>ours (w/o MOE)</th>
+                        <th>ExVC</th>
+                    </tr>
+                </thead>
+                <tbody id="audio-tbody">
+                    <!-- Audio rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+        <section id="thank-you">
+            <h2>Thank You!</h2>
+            <p>We deeply appreciate your time and effort in evaluating these audio files. Your support is invaluable to our research and development efforts.</p>            
+        </section>
+    </main>
+    <footer> 
+        <p>&copy; 2024 Voice Scorer. All rights reserved.</p>
+    </footer> 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const audioFiles = {
+                src: ['train-clean-360--1382_130492_000132_000000__train-clean-360--5940_54613_000029_000000_src.wav',
+                         'train-clean-100--250_142286_000014_000000__train-clean-100--1743_142912_000018_000004_src.wav',
+                         'train-clean-360--4807_26853_000070_000000__train-clean-100--8770_295465_000011_000004_src.wav',
+                         'train-clean-100--2416_152139_000033_000001__train-clean-360--4719_25766_000016_000002_src.wav',
+                         'train-clean-100--669_129061_000040_000008__train-clean-100--3486_166446_000076_000001_src.wav',
+
+
+                         'train-clean-360--8875_293959_000094_000003__train-clean-360--1012_133424_000123_000000_src.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--3112_9554_000010_000003_src.wav',
+                         'train-clean-100--7190_90543_000087_000004__train-clean-100--1970_26100_000068_000000_src.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--1447_17506_000020_000001_src.wav',
+                         'train-clean-100--839_130898_000009_000000__train-clean-100--298_126791_000055_000000_src.wav',
+
+
+                         'train-clean-100--2691_156745_000019_000003__train-clean-100--4088_158077_000084_000000_src.wav',
+                         'train-clean-100--4160_11549_000028_000000__train-clean-100--8051_119902_000023_000001_src.wav',
+                         'train-clean-100--2196_170151_000006_000001__train-clean-360--5588_68188_000105_000000_src.wav',
+                         'train-clean-100--8123_275216_000029_000000__train-clean-360--3546_175390_000035_000000_src.wav',
+                         'train-clean-100--3440_171006_000033_000001__train-clean-100--4481_17498_000024_000001_src.wav',
+
+                         'train-clean-100--8770_295465_000011_000004__train-clean-100--1624_142933_000026_000001_src.wav',
+                         'train-clean-100--27_123349_000006_000003__train-clean-100--6454_120342_000017_000000_src.wav',
+                         'train-clean-100--4898_20016_000009_000004__train-clean-100--3699_19402_000018_000000_src.wav',
+                         'train-clean-100--6019_3185_000027_000008__train-clean-100--8088_284756_000170_000002_src.wav',
+                         'train-clean-100--4397_15666_000009_000006__train-clean-360--3792_176660_000011_000001_src.wav'], 
+                                                                                                                            
+                tgt: ['train-clean-360--1382_130492_000132_000000__train-clean-360--5940_54613_000029_000000_tgt.wav',
+                         'train-clean-100--250_142286_000014_000000__train-clean-100--1743_142912_000018_000004_tgt.wav',
+                         'train-clean-360--4807_26853_000070_000000__train-clean-100--8770_295465_000011_000004_tgt.wav',
+                         'train-clean-100--2416_152139_000033_000001__train-clean-360--4719_25766_000016_000002_tgt.wav',
+                         'train-clean-100--669_129061_000040_000008__train-clean-100--3486_166446_000076_000001_tgt.wav',
+
+                         'train-clean-360--8875_293959_000094_000003__train-clean-360--1012_133424_000123_000000_tgt.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--3112_9554_000010_000003_tgt.wav',
+                         'train-clean-100--7190_90543_000087_000004__train-clean-100--1970_26100_000068_000000_tgt.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--1447_17506_000020_000001_tgt.wav',
+                         'train-clean-100--839_130898_000009_000000__train-clean-100--298_126791_000055_000000_tgt.wav',
+          
+                         'train-clean-100--2691_156745_000019_000003__train-clean-100--4088_158077_000084_000000_tgt.wav',
+                         'train-clean-100--4160_11549_000028_000000__train-clean-100--8051_119902_000023_000001_tgt.wav',
+                         'train-clean-100--2196_170151_000006_000001__train-clean-360--5588_68188_000105_000000_tgt.wav',
+                         'train-clean-100--8123_275216_000029_000000__train-clean-360--3546_175390_000035_000000_tgt.wav',
+                         'train-clean-100--3440_171006_000033_000001__train-clean-100--4481_17498_000024_000001_tgt.wav',
+                         
+                         'train-clean-100--8770_295465_000011_000004__train-clean-100--1624_142933_000026_000001_tgt.wav',
+                         'train-clean-100--27_123349_000006_000003__train-clean-100--6454_120342_000017_000000_tgt.wav',
+                         'train-clean-100--4898_20016_000009_000004__train-clean-100--3699_19402_000018_000000_tgt.wav',
+                         'train-clean-100--6019_3185_000027_000008__train-clean-100--8088_284756_000170_000002_tgt.wav',
+                         'train-clean-100--4397_15666_000009_000006__train-clean-360--3792_176660_000011_000001_tgt.wav',],
+                
+                yourtts: ['train-clean-360--1382_130492_000132_000000__train-clean-360--5940_54613_000029_000000.wav',
+                         'train-clean-100--250_142286_000014_000000__train-clean-100--1743_142912_000018_000004.wav',
+                         'train-clean-360--4807_26853_000070_000000__train-clean-100--8770_295465_000011_000004.wav',
+                         'train-clean-100--2416_152139_000033_000001__train-clean-360--4719_25766_000016_000002.wav',
+                         'train-clean-100--669_129061_000040_000008__train-clean-100--3486_166446_000076_000001.wav',
+                        
+                         'train-clean-360--8875_293959_000094_000003__train-clean-360--1012_133424_000123_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--3112_9554_000010_000003.wav',
+                         'train-clean-100--7190_90543_000087_000004__train-clean-100--1970_26100_000068_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--1447_17506_000020_000001.wav',
+                         'train-clean-100--839_130898_000009_000000__train-clean-100--298_126791_000055_000000.wav',
+                         
+                         'train-clean-100--2691_156745_000019_000003__train-clean-100--4088_158077_000084_000000.wav',
+                         'train-clean-100--4160_11549_000028_000000__train-clean-100--8051_119902_000023_000001.wav',
+                         'train-clean-100--2196_170151_000006_000001__train-clean-360--5588_68188_000105_000000.wav',
+                         'train-clean-100--8123_275216_000029_000000__train-clean-360--3546_175390_000035_000000.wav',
+                         'train-clean-100--3440_171006_000033_000001__train-clean-100--4481_17498_000024_000001.wav',
+                         
+                         'train-clean-100--8770_295465_000011_000004__train-clean-100--1624_142933_000026_000001.wav',
+                         'train-clean-100--27_123349_000006_000003__train-clean-100--6454_120342_000017_000000.wav',
+                         'train-clean-100--4898_20016_000009_000004__train-clean-100--3699_19402_000018_000000.wav',
+                         'train-clean-100--6019_3185_000027_000008__train-clean-100--8088_284756_000170_000002.wav',
+                         'train-clean-100--4397_15666_000009_000006__train-clean-360--3792_176660_000011_000001.wav',],
+                
+                freevc: ['train-clean-360--1382_130492_000132_000000__train-clean-360--5940_54613_000029_000000.wav',
+                         'train-clean-100--250_142286_000014_000000__train-clean-100--1743_142912_000018_000004.wav',
+                         'train-clean-360--4807_26853_000070_000000__train-clean-100--8770_295465_000011_000004.wav',
+                         'train-clean-100--2416_152139_000033_000001__train-clean-360--4719_25766_000016_000002.wav',
+                         'train-clean-100--669_129061_000040_000008__train-clean-100--3486_166446_000076_000001.wav',
+                        
+                         'train-clean-360--8875_293959_000094_000003__train-clean-360--1012_133424_000123_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--3112_9554_000010_000003.wav',
+                         'train-clean-100--7190_90543_000087_000004__train-clean-100--1970_26100_000068_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--1447_17506_000020_000001.wav',
+                         'train-clean-100--839_130898_000009_000000__train-clean-100--298_126791_000055_000000.wav',
+                         
+                         'train-clean-100--2691_156745_000019_000003__train-clean-100--4088_158077_000084_000000.wav',
+                         'train-clean-100--4160_11549_000028_000000__train-clean-100--8051_119902_000023_000001.wav',
+                         'train-clean-100--2196_170151_000006_000001__train-clean-360--5588_68188_000105_000000.wav',
+                         'train-clean-100--8123_275216_000029_000000__train-clean-360--3546_175390_000035_000000.wav',
+                         'train-clean-100--3440_171006_000033_000001__train-clean-100--4481_17498_000024_000001.wav',
+                         
+                         'train-clean-100--8770_295465_000011_000004__train-clean-100--1624_142933_000026_000001.wav',
+                         'train-clean-100--27_123349_000006_000003__train-clean-100--6454_120342_000017_000000.wav',
+                         'train-clean-100--4898_20016_000009_000004__train-clean-100--3699_19402_000018_000000.wav',
+                         'train-clean-100--6019_3185_000027_000008__train-clean-100--8088_284756_000170_000002.wav',
+                         'train-clean-100--4397_15666_000009_000006__train-clean-360--3792_176660_000011_000001.wav',],
+            
+                knnvc: ['train-clean-360--1382_130492_000132_000000__train-clean-360--5940_54613_000029_000000.wav',
+                         'train-clean-100--250_142286_000014_000000__train-clean-100--1743_142912_000018_000004.wav',
+                         'train-clean-360--4807_26853_000070_000000__train-clean-100--8770_295465_000011_000004.wav',
+                         'train-clean-100--2416_152139_000033_000001__train-clean-360--4719_25766_000016_000002.wav',
+                         'train-clean-100--669_129061_000040_000008__train-clean-100--3486_166446_000076_000001.wav',
+                        
+                         'train-clean-360--8875_293959_000094_000003__train-clean-360--1012_133424_000123_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--3112_9554_000010_000003.wav',
+                         'train-clean-100--7190_90543_000087_000004__train-clean-100--1970_26100_000068_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--1447_17506_000020_000001.wav',
+                         'train-clean-100--839_130898_000009_000000__train-clean-100--298_126791_000055_000000.wav',
+                         
+                         'train-clean-100--2691_156745_000019_000003__train-clean-100--4088_158077_000084_000000.wav',
+                         'train-clean-100--4160_11549_000028_000000__train-clean-100--8051_119902_000023_000001.wav',
+                         'train-clean-100--2196_170151_000006_000001__train-clean-360--5588_68188_000105_000000.wav',
+                         'train-clean-100--8123_275216_000029_000000__train-clean-360--3546_175390_000035_000000.wav',
+                         'train-clean-100--3440_171006_000033_000001__train-clean-100--4481_17498_000024_000001.wav',
+                         
+                         'train-clean-100--8770_295465_000011_000004__train-clean-100--1624_142933_000026_000001.wav',
+                         'train-clean-100--27_123349_000006_000003__train-clean-100--6454_120342_000017_000000.wav',
+                         'train-clean-100--4898_20016_000009_000004__train-clean-100--3699_19402_000018_000000.wav',
+                         'train-clean-100--6019_3185_000027_000008__train-clean-100--8088_284756_000170_000002.wav',
+                         'train-clean-100--4397_15666_000009_000006__train-clean-360--3792_176660_000011_000001.wav',],
+            
+                ours1:  ['train-clean-360--1382_130492_000132_000000__train-clean-360--5940_54613_000029_000000.wav',
+                         'train-clean-100--250_142286_000014_000000__train-clean-100--1743_142912_000018_000004.wav',
+                         'train-clean-360--4807_26853_000070_000000__train-clean-100--8770_295465_000011_000004.wav',
+                         'train-clean-100--2416_152139_000033_000001__train-clean-360--4719_25766_000016_000002.wav',
+                         'train-clean-100--669_129061_000040_000008__train-clean-100--3486_166446_000076_000001.wav',
+                        
+                         'train-clean-360--8875_293959_000094_000003__train-clean-360--1012_133424_000123_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--3112_9554_000010_000003.wav',
+                         'train-clean-100--7190_90543_000087_000004__train-clean-100--1970_26100_000068_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--1447_17506_000020_000001.wav',
+                         'train-clean-100--839_130898_000009_000000__train-clean-100--298_126791_000055_000000.wav',
+                         
+                         'train-clean-100--2691_156745_000019_000003__train-clean-100--4088_158077_000084_000000.wav',
+                         'train-clean-100--4160_11549_000028_000000__train-clean-100--8051_119902_000023_000001.wav',
+                         'train-clean-100--2196_170151_000006_000001__train-clean-360--5588_68188_000105_000000.wav',
+                         'train-clean-100--8123_275216_000029_000000__train-clean-360--3546_175390_000035_000000.wav',
+                         'train-clean-100--3440_171006_000033_000001__train-clean-100--4481_17498_000024_000001.wav',
+                         
+                         'train-clean-100--8770_295465_000011_000004__train-clean-100--1624_142933_000026_000001.wav',
+                         'train-clean-100--27_123349_000006_000003__train-clean-100--6454_120342_000017_000000.wav',
+                         'train-clean-100--4898_20016_000009_000004__train-clean-100--3699_19402_000018_000000.wav',
+                         'train-clean-100--6019_3185_000027_000008__train-clean-100--8088_284756_000170_000002.wav',
+                         'train-clean-100--4397_15666_000009_000006__train-clean-360--3792_176660_000011_000001.wav',],
+            
+                    ours3:  ['train-clean-360--1382_130492_000132_000000__train-clean-360--5940_54613_000029_000000.wav',
+                         'train-clean-100--250_142286_000014_000000__train-clean-100--1743_142912_000018_000004.wav',
+                         'train-clean-360--4807_26853_000070_000000__train-clean-100--8770_295465_000011_000004.wav',
+                         'train-clean-100--2416_152139_000033_000001__train-clean-360--4719_25766_000016_000002.wav',
+                         'train-clean-100--669_129061_000040_000008__train-clean-100--3486_166446_000076_000001.wav',
+                        
+                         'train-clean-360--8875_293959_000094_000003__train-clean-360--1012_133424_000123_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--3112_9554_000010_000003.wav',
+                         'train-clean-100--7190_90543_000087_000004__train-clean-100--1970_26100_000068_000000.wav',
+                         'train-clean-100--6563_285357_000004_000001__train-clean-100--1447_17506_000020_000001.wav',
+                         'train-clean-100--839_130898_000009_000000__train-clean-100--298_126791_000055_000000.wav',
+                         
+                         'train-clean-100--2691_156745_000019_000003__train-clean-100--4088_158077_000084_000000.wav',
+                         'train-clean-100--4160_11549_000028_000000__train-clean-100--8051_119902_000023_000001.wav',
+                         'train-clean-100--2196_170151_000006_000001__train-clean-360--5588_68188_000105_000000.wav',
+                         'train-clean-100--8123_275216_000029_000000__train-clean-360--3546_175390_000035_000000.wav',
+                         'train-clean-100--3440_171006_000033_000001__train-clean-100--4481_17498_000024_000001.wav',
+                         
+                         'train-clean-100--8770_295465_000011_000004__train-clean-100--1624_142933_000026_000001.wav',
+                         'train-clean-100--27_123349_000006_000003__train-clean-100--6454_120342_000017_000000.wav',
+                         'train-clean-100--4898_20016_000009_000004__train-clean-100--3699_19402_000018_000000.wav',
+                         'train-clean-100--6019_3185_000027_000008__train-clean-100--8088_284756_000170_000002.wav',
+                         'train-clean-100--4397_15666_000009_000006__train-clean-360--3792_176660_000011_000001.wav',],
+            
+            };
+
+             // Get the maximum number of files
+            const maxFiles = Math.max(...Object.values(audioFiles).map(files => files.length));
+
+            // Populate the table with index and audio files
+            const tbody = document.getElementById('audio-tbody');
+            for (let i = 0; i < maxFiles; i++) {
+                const row = document.createElement('tr');
+
+                // Add index
+                const indexCell = document.createElement('td');
+                indexCell.textContent = (i + 1).toString();
+                indexCell.style.textAlign = 'center';
+                row.appendChild(indexCell);
+
+                // Add audio files
+                Object.keys(audioFiles).forEach(folder => {
+                    const cell = document.createElement('td');
+                    const file = audioFiles[folder][i];
+                    if (file) {
+                        const filePath = `Audios/${folder}/${file}`;
+                        const audioContainer = document.createElement('div');
+                        audioContainer.className = 'audio-container'; 
+                        const audio = document.createElement('audio');
+                        
+                        audio.controls = true;
+                        const source = document.createElement('source');
+                        source.src = filePath;
+                        source.type = 'audio/wav';
+                        audio.appendChild(source);
+                        const audioName = document.createElement('p');
+                        audioName.textContent = file;
+                        audioName.style.fontSize = 'small';
+                        audioName.style.width = '100%'; // Ensure the width matches the audio element
+                        audioName.className = 'audio-name'; // Added class for consistent width
+                        audioContainer.appendChild(audio);
+                        audioContainer.appendChild(audioName);
+                        cell.appendChild(audioContainer);
+
+                        // Add error handling to check if audio file loads correctly
+                        audio.addEventListener('error', () => {
+                            const errorText = document.createElement('p');
+                            errorText.textContent = `Error loading ${filePath}`;
+                            errorText.style.color = 'red';
+                            cell.appendChild(errorText);
+                        });
+
+                        // Debugging: Log the file path to the console
+                        console.log(`Loading file: ${filePath}`);
+                    }
+                    row.appendChild(cell);
+                });
+
+                tbody.appendChild(row);
+            }
+        });
+    </script>
 </body>
 </html>
