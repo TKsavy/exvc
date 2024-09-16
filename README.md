@@ -1,2 +1,3 @@
-# exvc
-# Code and samples to be released soon
+## Audio Sample for "ExVC: Leveraging Mixture of Experts Models for Efficient Zero-shot Voice Conversion"
+**(Paper under Review)**  
+*Source code will be released once the paper is accepted.*
